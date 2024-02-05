@@ -5,6 +5,19 @@ import { getMealById } from "@/lib/meals";
 
 import classes from "./page.module.css";
 
+export async function generateMetadata({ params }) {
+  const meal = getMealById(params.slug);
+
+  if (!meal) {
+    notFound();
+  }
+
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
+
 const MealsItemsPage = ({ params }) => {
   const meal = getMealById(params.slug);
 
